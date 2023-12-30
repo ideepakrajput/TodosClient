@@ -30,6 +30,7 @@
 .searchBox input {
     flex: 1;
     padding: 8px;
+    font-size: 14px;
     border: none;
     border-radius: 5px;
     outline: none;
@@ -40,42 +41,6 @@
 .addTodo input:focus {
     background-color: white;
 }
-
-.addTodo {
-    display: flex;
-    position: relative;
-    width: 300px;
-}
-
-.addTodo input {
-    width: 100%;
-    padding: 8px;
-    border: none;
-    border-radius: 5px;
-    outline: none;
-    background-color: rgba(255, 255, 255, 0.5);
-    margin-bottom: 10px;
-}
-
-.addTodo button {
-    position: absolute;
-    top: 40%;
-    right: 0;
-    transform: translateY(-50%);
-    border: none;
-    border-radius: 5px;
-    outline: none;
-    background-color: rgba(255, 255, 255, 0.5);
-    cursor: pointer;
-    transition: background 0.3s ease;
-}
-
-
-.addTodo button:hover {
-    background-color: #3494e6;
-}
-
-/* YourComponent.css */
 
 .task-card {
     display: flex;
@@ -94,18 +59,20 @@
 
 .task-content {
     flex-grow: 1;
-    /* Allow the content to grow and take up the available space */
 }
 
-.task-content p,
-.task-content s {
-    margin: 0;
+.task-content input {
+    width: 100%;
+    padding: 8px;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    margin-bottom: 10px;
 }
 
 .task-icons {
     display: flex;
     gap: 10px;
-    /* Adjust the spacing between icons */
 }
 
 .task-icons button {
@@ -116,13 +83,41 @@
 
 .icon {
     color: #555;
-    /* Adjust icon color */
     font-size: 24px;
-    /* Adjust icon size */
     transition: color 0.3s ease;
 }
 
 .icon:hover {
     color: #3494e6;
-    /* Change color on hover */
+}
+
+.addTodo {
+    display: flex;
+    align-items: center;
+    width: 300px;
+    margin: 10px;
+}
+
+.addTodo input {
+    flex: 1;
+    padding: 16px 8px;
+    border: none;
+    font-size: 16px;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+}
+
+.addTodo button {
+    padding: 16px;
+    border: none;
+    border-radius: 0 5px 5px 0;
+    outline: none;
+    background-color: #3494e6;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.addTodo button:hover {
+    background-color: #26608e;
 }

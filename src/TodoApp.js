@@ -12,6 +12,8 @@ const TodoApp = () => {
   const [task, setTask] = useState('');
   const [search, setSearch] = useState('');
   const [currentTime, setCurrentTime] = useState('');
+  const [editTaskId, setEditTaskId] = useState(null);
+  const [editedTask, setEditedTask] = useState('');
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -46,9 +48,26 @@ const TodoApp = () => {
       console.log(res.data);
     });
   }
-  const handleEditTask = async (ID) => {
-    await axios.put(`${BASE_API_URL}todo`, { ID, task });
+  const handleUpdateTask = async (taskId, editedTask) => {
+    await axios.put(`${BASE_API_URL}todo`, { ID: taskId, task: editedTask });
   }
+
+  const handleStartEdit = (taskId, taskText) => {
+    setEditTaskId(taskId);
+    setEditedTask(taskText);
+  };
+
+  const handleCancelEdit = () => {
+    setEditTaskId(null);
+    setEditedTask('');
+  };
+
+  const handleUpdate = (taskId) => {
+    handleUpdateTask(taskId, editedTask);
+    setEditTaskId(null);
+    setEditedTask('');
+  };
+
   const handleDoneTask = async (ID, isComplete) => {
     await axios.post(`${BASE_API_URL}is-complete`, { ID, isComplete: !isComplete });
   }
@@ -88,21 +107,40 @@ const TodoApp = () => {
               {tasks.map((item, index) => (
                 <div key={index} className={`task-card ${item.isComplete ? 'completed' : ''}`}>
                   <div className="task-content">
-                    {item.isComplete ? (
-                      <s>{item.task}</s>
+                    {editTaskId === item.ID ? (
+                      <>
+                        <input
+                          type="text"
+                          value={editedTask}
+                          onChange={(e) => setEditedTask(e.target.value)}
+                        />
+                        <button onClick={() => handleUpdate(item.ID)}>
+                          <CheckCircleIcon className="icon" />
+                          Update
+                        </button>
+                        <button onClick={handleCancelEdit}>
+                          <DeleteIcon className="icon" />
+                          Cancel
+                        </button>
+                      </>
                     ) : (
-                      <p>{item.task}</p>
+                      <>{item.isComplete ? <p style={{ textDecoration: "line-through" }}>{item.task}</p> : <p>{item.task}</p>}</>
                     )}
                   </div>
                   <div className="task-icons">
+                    {editTaskId !== item.ID && (
+                      <button onClick={() => handleStartEdit(item.ID, item.task)}>
+                        <EditIcon className="icon" />
+                        Edit
+                      </button>
+                    )}
                     <button onClick={() => handleDoneTask(item.ID, item.isComplete)}>
                       <CheckCircleIcon className="icon" />
-                    </button>
-                    <button onClick={() => handleEditTask(item.ID)}>
-                      <EditIcon className="icon" />
+                      Done
                     </button>
                     <button onClick={() => handleDeleteTask(item.ID)}>
                       <DeleteIcon className="icon" />
+                      Delete
                     </button>
                   </div>
                 </div>
@@ -111,16 +149,16 @@ const TodoApp = () => {
           ) : (
             <>
               {search ? (
-                <h3>No match found !</h3>
+                <p>No match found !</p>
               ) : (
-                <h3>Well done! All tasks are completed.</h3>
+                <p>Well done! All tasks are completed.</p>
               )}
             </>
           )}
         </div>
 
         <div className='addTodo'>
-          <input type="text" value={task} onChange={(e) => setTask(e.target.value)} />
+          <input type="text" placeholder="Enter task..." value={task} onChange={(e) => setTask(e.target.value)} />
           <button onClick={handleCreateTask}><AddIcon /></button>
         </div>
       </div>
