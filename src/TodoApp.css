@@ -1,0 +1,128 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #3494e6, #ec6ead);
+    min-height: 100vh;
+}
+
+.box {
+    width: 700px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #ec6ead, #ffb400);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.searchBox {
+    display: flex;
+    align-items: center;
+    width: 300px;
+    margin: 10px;
+    position: relative;
+}
+
+.searchBox input {
+    flex: 1;
+    padding: 8px;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.searchBox input:focus,
+.addTodo input:focus {
+    background-color: white;
+}
+
+.addTodo {
+    display: flex;
+    position: relative;
+    width: 300px;
+}
+
+.addTodo input {
+    width: 100%;
+    padding: 8px;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    background-color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 10px;
+}
+
+.addTodo button {
+    position: absolute;
+    top: 40%;
+    right: 0;
+    transform: translateY(-50%);
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    background-color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+
+.addTodo button:hover {
+    background-color: #3494e6;
+}
+
+/* YourComponent.css */
+
+.task-card {
+    display: flex;
+    justify-content: space-between;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    padding: 10px;
+    margin: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+.task-card.completed {
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+.task-content {
+    flex-grow: 1;
+    /* Allow the content to grow and take up the available space */
+}
+
+.task-content p,
+.task-content s {
+    margin: 0;
+}
+
+.task-icons {
+    display: flex;
+    gap: 10px;
+    /* Adjust the spacing between icons */
+}
+
+.task-icons button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.icon {
+    color: #555;
+    /* Adjust icon color */
+    font-size: 24px;
+    /* Adjust icon size */
+    transition: color 0.3s ease;
+}
+
+.icon:hover {
+    color: #3494e6;
+    /* Change color on hover */
+}
